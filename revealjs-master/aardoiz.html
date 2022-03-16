@@ -1,0 +1,225 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/white.css">
+
+        <style>
+          body {
+              background: url( 'img/no_cubo.jpg' );
+          }
+      </style>
+
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+              <section data-background="img/si_cubo.jpg">
+                <h1><font color="#dfc161">NLP</font></h1>
+                <br><br><br><br><br>
+                <h2>Alfonso Ardoiz Galaz</h2>
+              </section>
+
+              <section data-transition="fade">
+                <h3><font color="#9ae3cd">Tabla de Contenidos</font></h3>
+                <hr>
+                <ol>
+                  <li><a href="#/2/0">Python para el NLP</a></li>
+                  <li><a href="#/3/0">Principales Aplicaciones</a></li>
+                  <li><a href="#/4/0">Herramientas</a></li>
+                </ol>
+              </section>
+  
+              <section>
+                <section data-background="img/cubo.jpg" >
+                  <h2 id="py"><font color="#9ab2e3">Python para el NLP</font></h2>
+                </section>
+
+                <section data-markdown>
+                  <script type="text/template">
+                    ### ¿Qué es Python?
+
+                    * Python es un lenguaje de programación **interpretado**
+                      - Está orientado a objetos
+                      - Permite programación dinámica
+                  </script>
+                </section>
+
+                <section data-markdown>
+                  <script type="text/template">
+                    ### ¿Qué es el NLP?
+
+                    - NLP corresponde a las siglas de _procesamiento del lenguaje natural_ en inglés. En español se corresponde al PLN.
+                      
+                    - **Importante** Hay que distinguir entre:
+                      
+                      - Lingüística Computacional
+                      - Procesamiento de Lenguaje Natural
+                  </script>
+                </section>
+
+                <section data-markdown>
+                  <script type="text/template">
+                    ### Lingüística Computacional
+                      - Disciplina que estudia la formalización computacionalde los procesos de producción y comprensióndel lenguaje humano [Fernández-Pampillón (2015)]
+                  </script>
+                </section>
+
+                <section data-markdown>
+                  <script type="text/template">
+                    ### Procesamiento de Lenguaje Natural
+                    - Formulación e investigación de mecanismos computacionalmente efectivospara la comunicacióna través del lenguaje natural [Carbonel (1987)]
+                  </script>
+                </section>
+
+              </section>
+
+              <section>
+
+                <section data-background="img/cubo.jpg" > 
+                  <h2 id="app"><font color="#9ab2e3">Principales Aplicaciones</font></h2> 
+                </section>
+
+                <section data-markdown> 
+                  <script type="text/template">
+                    ### Procesamiento de textos
+
+                    - En el NLP la mayoría de los datos están llenos de _ruido_ y hay que limpiarlos.
+                    - Normalmente se recurre a pipelines completas de limpieza:
+
+                    ![Pipeline de limpieza](img/cleaning.png)
+                  </script>
+                </section>
+
+                
+                <section> <h3>Clasificadores automáticos</h3> 
+                  
+                    <h4>Enfoque Bayesiano</h4>
+                    <ul>
+                      <li>Un tipo de clasificador basado en el teorema de Bayes.</li>
+                    </ul>
+                    <h5>Redes Neuronales</h5>
+                    <ul>
+                      <li>Los clasificadores más potentes y precisos actualmente.</li>
+                    </ul>
+                </section>
+
+                <section> 
+                  <h3>Recuperación de Información</h3>
+                  Recuperación de información a partir de grandes corpus de texto.
+                  <p >Hoy en día una de las aplicaciones más demandadas.</p>
+                  <p class="fragment fade-out">El SOTA en español es el siguiente:</p>
+                  <table class="fragment grow">
+                    
+                    <tr>
+                      <th>Tipo de modelo</th>
+                      <th>MRR</th>
+                      <th>Recall</th>
+                    </tr>
+                    <tr>
+                      <td>BM25</td>
+                      <td>0.184</td>
+                      <td>0.857</td>
+                    </tr>
+
+                    <tr>
+                      <td>mColB</td>
+                      <td>0.301</td>
+                      <td>0.897</td>
+                    </tr>
+                  </table>
+                </section>
+
+                <section> 
+                  <h3>Similaridad semántica</h3>
+                  Calcular cómo de similares son dos oraciones. Se calcula a partir del producto escalar:
+                  <p class="fragment highlight-green">$$\vec{p} \cdot \vec{q}$$</p>
+
+                  <aside class="notes">
+                    Es una pena que no exista un fragment highlight-pink :(
+                  </aside>
+
+                </section>
+
+              </section>
+
+              <section>
+
+                <section data-background="img/cubo.jpg"> 
+                  <h2 id="lib"><font color="#9ab2e3">Herramientas</font></h2> 
+                </section>
+
+                <section data-markdown> 
+                  <script type="text/template">
+                    ## Dos herramientas principales
+
+                    - Spacy <!-- .element: class="fragment" data-fragment-index="2" -->
+                      - Librería para NLP **industrial** <!-- .element: class="fragment" data-fragment-index="3" -->
+                    - Nltk <!-- .element: class="fragment" data-fragment-index="4" -->
+                      - El "abuelo" de las librerías del NLP <!-- .element: class="fragment" data-fragment-index="5" -->
+                  </script>
+                </section>
+
+                <section data-transition="slide"> 
+                  <h3>Spacy</h3>
+                  <ul>
+                    <li>Herramientas más versátil para el NLP</li>
+                    <li>Sencillez y uso de pipelines.</p></li>
+                  <img src="img/pipe.png" alt="Estructura base de una pipeline de Spacy">
+                  <p class="fragment shrink"> Más info en <a href="https://spacy.io/">la página oficial de Spacy</a>
+                </section>
+
+                <section data-transition="slide"> 
+                  <h3>NLTK</h3>
+                  <p class="fragment semi-fade-out" data-fragment-index="2">Útil pero no mucho</p> 
+                  <ul class="fragment" data-fragment-index="3">
+                    <li>Capacidad de cargar corpus y datasets sin necesidad de un módulo externo</li> 
+                    <li>Un poco obsoleta</li>
+                  </ul>
+                  <iframe class="fragment" data-fragment-index="4" width="560" height="315" src="https://www.youtube.com/embed/Q0nCLDekphE" title="Spacy vs NLTK" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+                </section>
+
+              </section>
+
+      
+              <section> 
+                <section data-background="img/cubo.jpg"> 
+                  <h2><font color="#9ab2e3">Y para finalizar...</font></h2>
+                </section>
+                <section data-background-video="media/rick.mp4">
+                  <h3><font color="#dfc161">Muchas gracias por su atención</font></h3> 
+                  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                </section>
+              </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            Reveal.initialize({
+              // Mostrar numero de slide.
+              slideNumber: true,
+
+              // permitir a los estudiantes que usen el tacto como método de movimiento rápido
+              touch: true,
+
+              // Milisegundos entre transiciones automaticas de slides.
+              autoSlide: 2000,
+
+              // Tipo de transicion.
+              transition: 'zoom',
+
+              dependencies: [
+		// Para interpretar Markdown en los elementos <section>
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/math-katex/math-katex.js', async: true },
+                { src: 'plugin/mouse-pointer/mouse-pointer.js' },    
+              ]
+            });
+        </script>
+    </body>
+</html>
