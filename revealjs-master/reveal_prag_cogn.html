@@ -1,0 +1,126 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/white.css">
+
+        <style>
+          body {
+              background: url( 'img/fondo_2.jpg' );
+          }
+          section{
+            color:aliceblue;
+          }
+      </style>
+
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+              <section data-background="img/fondo_1.jpg">
+                <h1><font color="#dfc161">Pragmática Cognitiva</font></h1>
+                <br><br><br><br><br>
+                <h2><font color="bronze">Alfonso Ardoiz Galaz</font></h2>
+              </section>
+
+              <section data-transition="fade" data-background="img/fondo_3.jpg">
+                <h3><font color="#dfc161">Tabla de Contenidos</font></h3>
+
+                <ul class="fragment grow">
+                  <li><a href="#/3/0"><font color="fb2f51">Pragmática Cognitiva</font></a></li>
+                  <li><a href="#/2/0"><font color="fb2f51">Principio de cooperación</font></a></li>
+                 
+                </ul>
+
+              </section>
+  
+              <section>
+                <section data-background="img/fondo_3.jpg" >
+                  <h2 id="py"><font color="ffcd23">Pragmática Cognitiva</font></h2>
+                </section>
+
+                <section data-markdown>
+                  <script type="text/template">
+                    ### <font color="antiquewhite"> Conversaciones</font>
+
+                    * Para entender un diálogo no solo hace falta tener conocimiento lingüístico, sino que es imprescindible poner en marcha el conocimiento del mundo.
+
+                      - Hay que acceder a informaciones previas que permitan poner en relación entre sí las intervenciones del diálogo y convertirlas en partes de un tema común.
+                      
+                  </script>
+                </section>
+
+                <section data-markdown>
+                  <script type="text/template">
+                    ### <font color="antiquewhite"> Procesos</font>
+                    Cuando se procesa información hay dos procesos:
+                    - **Descodificación** -> Establecen relacion entre expresiones y el signficado.
+                      
+                    - **Inferencias** -> Combinan la información lingüística y extralingüística. Interpretan el significado
+                  </script>
+                </section>
+              </section>
+
+              <section>
+
+                <section data-background="img/fondo_3.jpg" > 
+                  <h2 id="app"><font color="ffcd23">Principio de Cooperación de Grice</font></h2> 
+                </section>
+
+                <section data-markdown> 
+                  <script type="text/template">
+                    ### <font color="antiquewhite"> Principio</font>
+
+                    "Make your conversational contribution such as is required, at the stage at which it occurs, by the accepted purpose or direction of the talk exchange, in which you are engaged"
+                    Grice, _Logic and conversation_, 1975
+                  </script>
+                </section>
+
+                
+                <section> 
+                  
+                  <h3><font color="antiquewhite"> Cuatro máximas</font></h3> 
+                  El principio se traduce en cuatro máximas
+
+                    <ul>
+                      <li>Cantidad</li>
+                      <li>Calidad</li>
+                      <li>Relación</li>
+                      <li>Modalidad</li>
+                    </ul>
+                </section>
+
+
+              </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            Reveal.initialize({
+              // Mostrar numero de slide.
+              slideNumber: true,
+
+              // permitir a los estudiantes que usen el tacto como método de movimiento rápido
+              touch: true,
+
+              // Milisegundos entre transiciones automaticas de slides.
+              autoSlide: 2000,
+
+              // Tipo de transicion.
+              transition: 'zoom',
+
+              dependencies: [
+		// Para interpretar Markdown en los elementos <section>
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/speech/speech.js' },
+                { src: 'plugin/mouse-pointer/mouse-pointer.js' },    
+              ]
+            });
+        </script>
+    </body>
+</html>
