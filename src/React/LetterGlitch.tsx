@@ -1,18 +1,6 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
-const LetterGlitch = ({
-  glitchColors = ["#5e4491", "#A476FF", "#241a38"],
-  glitchSpeed = 33,
-  centerVignette = false,
-  outerVignette = false,
-  smooth = true,
-}: {
-  glitchColors: string[];
-  glitchSpeed: number;
-  centerVignette: boolean;
-  outerVignette: boolean;
-  smooth: boolean;
-}) => {
+const MatrixTextWall = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationRef = useRef<number | null>(null);
   const letters = useRef<
@@ -21,85 +9,50 @@ const LetterGlitch = ({
       color: string;
       targetColor: string;
       colorProgress: number;
+      isMessage: boolean;
+      messageIndex: number;
     }[]
   >([]);
   const grid = useRef({ columns: 0, rows: 0 });
   const context = useRef<CanvasRenderingContext2D | null>(null);
   const lastGlitchTime = useRef(Date.now());
+  const [revealedChars, setRevealedChars] = useState(0);
+  const [phase, setPhase] = useState<'glitch' | 'revealing' | 'complete'>('glitch');
 
+  const messageLines = [
+    " AI is the new electricity ",
+    " and will transform and improve ", 
+    " nearly all areas of human lives "
+  ];
+  const message = messageLines.join("");
   const fontSize = 16;
   const charWidth = 10;
   const charHeight = 20;
-
-  const lettersAndSymbols = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-    "!",
-    "@",
-    "#",
-    "$",
-    "&",
-    "*",
-    "(",
-    ")",
-    "-",
-    "_",
-    "+",
-    "=",
-    "/",
-    "[",
-    "]",
-    "{",
-    "}",
-    ";",
-    ":",
-    "<",
-    ">",
-    ",",
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
+  
+  // Tonos de gris más apagados para los # 
+  const grayColors = ["#333333", "#444444", "#555555", "#666666", "#777777", "#888888"];
+  const glitchSpeed = 99;
+  const centerVignette = false;
+  const outerVignette = false;
+  const smooth = true;
+  
+  // Paleta azul eléctrico MUY vibrante y brillante para el mensaje
+  const blueColors = [
+    "#00AAFF",  // Azul brillante
+    "#33BBFF",  // Azul cielo brillante  
+    "#66CCFF",  // Azul claro brillante
+    "#00DDFF",  // Cian brillante
+    "#4488FF",  // Azul real brillante
+    "#77AAFF",  // Azul lavanda brillante
+    "#00FFFF",  // Cian puro
+    "#55CCFF"   // Azul hielo brillante
   ];
 
-  const getRandomChar = () => {
-    return lettersAndSymbols[
-      Math.floor(Math.random() * lettersAndSymbols.length)
-    ];
-  };
-
-  const getRandomColor = () => {
-    return glitchColors[Math.floor(Math.random() * glitchColors.length)];
+  const getRandomColor = (isMessage: boolean = false) => {
+    if (isMessage) {
+      return blueColors[Math.floor(Math.random() * blueColors.length)];
+    }
+    return grayColors[Math.floor(Math.random() * grayColors.length)];
   };
 
   const hexToRgb = (hex: string) => {
@@ -137,15 +90,55 @@ const LetterGlitch = ({
     return { columns, rows };
   };
 
+  const getMessagePosition = (columns: number, rows: number) => {
+    // Calcular posición centrada para 3 líneas
+    const lineHeight = 2; // Espaciado entre líneas
+    const totalHeight = messageLines.length + (messageLines.length - 1) * (lineHeight - 1);
+    const startRow = Math.floor((rows - totalHeight) / 2);
+    
+    return { startRow, lineHeight };
+  };
+
   const initializeLetters = (columns: number, rows: number) => {
     grid.current = { columns, rows };
     const totalLetters = columns * rows;
-    letters.current = Array.from({ length: totalLetters }, () => ({
-      char: getRandomChar(),
-      color: getRandomColor(),
-      targetColor: getRandomColor(),
-      colorProgress: 1,
-    }));
+    const { startRow, lineHeight } = getMessagePosition(columns, rows);
+
+    letters.current = Array.from({ length: totalLetters }, (_, index) => {
+      const row = Math.floor(index / columns);
+      const col = index % columns;
+      
+      // Determinar si esta posición corresponde al mensaje
+      let messageIndex = -1;
+      let isMessage = false;
+      
+      // Revisar cada línea del mensaje
+      let globalCharIndex = 0;
+      
+      for (let lineIndex = 0; lineIndex < messageLines.length; lineIndex++) {
+        const line = messageLines[lineIndex];
+        const lineRow = startRow + lineIndex * lineHeight;
+        const lineStartCol = Math.floor((columns - line.length) / 2);
+        
+        if (row === lineRow && col >= lineStartCol && col < lineStartCol + line.length) {
+          const charIndexInLine = col - lineStartCol;
+          messageIndex = globalCharIndex + charIndexInLine;
+          isMessage = true;
+          break;
+        }
+        
+        globalCharIndex += line.length;
+      }
+
+      return {
+        char: "#",
+        color: getRandomColor(false),
+        targetColor: getRandomColor(false),
+        colorProgress: 1,
+        isMessage,
+        messageIndex,
+      };
+    });
   };
 
   const resizeCanvas = () => {
@@ -176,44 +169,77 @@ const LetterGlitch = ({
     if (!context.current || letters.current.length === 0) return;
     const ctx = context.current;
     const { width, height } = canvasRef.current!.getBoundingClientRect();
+    
+    // Fondo transparente
     ctx.clearRect(0, 0, width, height);
+    
     ctx.font = `${fontSize}px monospace`;
     ctx.textBaseline = "top";
 
     letters.current.forEach((letter, index) => {
       const x = (index % grid.current.columns) * charWidth;
       const y = Math.floor(index / grid.current.columns) * charHeight;
-      ctx.fillStyle = letter.color;
-      ctx.fillText(letter.char, x, y);
+      
+      // Si es parte del mensaje revelado, usar colores vibrantes
+      if (letter.isMessage && letter.messageIndex < revealedChars && letter.char !== "#") {
+        ctx.fillStyle = letter.color;
+        // Añadir un brillo sutil para las letras del mensaje
+        ctx.shadowColor = letter.color;
+        ctx.shadowBlur = 3;
+        ctx.fillText(letter.char, x, y);
+        ctx.shadowBlur = 0; // Reset shadow
+      } else {
+        // Para los # usar colores más apagados sin sombra
+        ctx.fillStyle = letter.color;
+        ctx.fillText(letter.char, x, y);
+      }
     });
   };
 
   const updateLetters = () => {
-    if (!letters.current || letters.current.length === 0) return; // Prevent accessing empty array
+    if (!letters.current || letters.current.length === 0) return;
 
-    const updateCount = Math.max(1, Math.floor(letters.current.length * 0.05));
+    // Actualizar más caracteres para que se vea más dinámico
+    const updateCount = Math.max(1, Math.floor(letters.current.length * 0.08));
 
     for (let i = 0; i < updateCount; i++) {
       const index = Math.floor(Math.random() * letters.current.length);
-      if (!letters.current[index]) continue; // Skip if index is invalid
+      if (!letters.current[index]) continue;
 
-      letters.current[index].char = getRandomChar();
-      letters.current[index].targetColor = getRandomColor();
-
-      if (!smooth) {
-        letters.current[index].color = letters.current[index].targetColor;
-        letters.current[index].colorProgress = 1;
-      } else {
-        letters.current[index].colorProgress = 0;
+      const letter = letters.current[index];
+      
+      // Solo actualizar # del fondo, no las letras del mensaje revelado
+      if (letter.isMessage && letter.messageIndex < revealedChars) {
+        // Keep updating revealed message letters with bright colors
+        letter.targetColor = getRandomColor(true);
+        letter.colorProgress = 0;
+        continue;
       }
+
+      letter.targetColor = getRandomColor(false);
+      letter.colorProgress = 0;
     }
+  };
+
+  const updateMessageReveal = () => {
+    if (phase !== 'revealing') return;
+
+    letters.current.forEach((letter, index) => {
+      if (letter.isMessage && letter.messageIndex === revealedChars) {
+        // Cambiar # por la letra del mensaje
+        letter.char = message[letter.messageIndex];
+        letter.color = getRandomColor(true); // Set immediate bright color
+        letter.targetColor = getRandomColor(true);
+        letter.colorProgress = 1; // Make it immediate, no transition needed
+      }
+    });
   };
 
   const handleSmoothTransitions = () => {
     let needsRedraw = false;
     letters.current.forEach((letter) => {
       if (letter.colorProgress < 1) {
-        letter.colorProgress += 0.05;
+        letter.colorProgress += 0.08;
         if (letter.colorProgress > 1) letter.colorProgress = 1;
 
         const startRgb = hexToRgb(letter.color);
@@ -234,10 +260,46 @@ const LetterGlitch = ({
     }
   };
 
+  // Lógica de fases - sin reset automático
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    if (phase === 'glitch') {
+      // Mostrar efecto glitch por 3 segundos
+      timer = setTimeout(() => {
+        setPhase('revealing');
+      }, 3000);
+    } else if (phase === 'revealing') {
+      // Revelar caracteres secuencialmente
+      if (revealedChars < message.length) {
+        timer = setTimeout(() => {
+          setRevealedChars(prev => prev + 1);
+        }, 40);
+      } else {
+        timer = setTimeout(() => {
+          setPhase('complete');
+        }, 800);
+      }
+    }
+    // En fase 'complete' no hacemos nada - el mensaje permanece visible
+
+    return () => clearTimeout(timer);
+  }, [phase, revealedChars, message.length]);
+
+  // Actualizar revelación cuando cambie revealedChars
+  useEffect(() => {
+    if (phase === 'revealing') {
+      updateMessageReveal();
+    }
+  }, [revealedChars, phase]);
+
   const animate = () => {
     const now = Date.now();
+    
     if (now - lastGlitchTime.current >= glitchSpeed) {
-      updateLetters();
+      if (phase === 'glitch' || phase === 'complete') {
+        updateLetters();
+      }
       drawLetters();
       lastGlitchTime.current = now;
     }
@@ -274,7 +336,6 @@ const LetterGlitch = ({
       cancelAnimationFrame(animationRef.current!);
       window.removeEventListener("resize", handleResize);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [glitchSpeed, smooth]);
 
   return (
@@ -290,4 +351,4 @@ const LetterGlitch = ({
   );
 };
 
-export default LetterGlitch;
+export default MatrixTextWall;
