@@ -10,52 +10,59 @@
           Have a question or a project in mind? Feel free to reach out.
         </p>
         <div class="flex items-center gap-2">
-          <span>Location:</span>
+          <span>My Location:</span>
           <span class="text-[var(--white)]">Remote | Burgos, Spain</span>
+          <a 
+            href="https://docs.google.com/document/d/1YCUo7FejTGIUTtmTXBgD7wlm65dORkelO7B4xONG0ek/edit?usp=sharing" 
+            download="CV.pdf"
+            class="block text-center px-4 py-2 bg-[var(--white-icon-tr)] text-[var(--white)] rounded-lg opacity-60 transition-opacity border border-[var(--white-icon-tr)] hover:opacity-100 hover:bg-[var(--white-icon-tr)]"
+          >
+            Check my CV
+          </a>
         </div>
       </div>
+    </div>
 
-      <div>
-        <form
-          id="contact-form"
-          action="https://formspree.io/f/mnnzkbba"
-          method="POST"
-          class="flex flex-col gap-4"
+    <div>
+      <form
+        id="contact-form"
+        action="https://formspree.io/f/mnnzkbba"
+        method="POST"
+        class="flex flex-col gap-4"
+      >
+        <input
+          type="text"
+          name="from_name"
+          placeholder="Name"
+          required
+          class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+        />
+        <input
+          type="email"
+          name="reply_to"
+          placeholder="Your Email"
+          required
+          class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+        />
+        <textarea
+          name="message"
+          placeholder="Message"
+          rows="6"
+          required
+          class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
+        ></textarea>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-[var(--white-icon-tr)] text-[var(--white)] rounded-lg opacity-60 transition-opacity border border-[var(--white-icon-tr)] hover:opacity-100 hover:bg-[var(--white-icon-tr)]"
         >
-          <input
-            type="text"
-            name="from_name"
-            placeholder="Name"
-            required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
-          />
-          <input
-            type="email"
-            name="reply_to"
-            placeholder="Your Email"
-            required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
-          />
-          <textarea
-            name="message"
-            placeholder="Message"
-            rows="6"
-            required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
-          ></textarea>
-          <button
-            type="submit"
-            class="px-4 py-2 bg-[var(--white-icon-tr)] text-[var(--white)] rounded-lg opacity-60 transition-opacity border border-[var(--white-icon-tr)] hover:opacity-100 hover:bg-[var(--white-icon-tr)]"
-          >
-            Submit
-          </button>
-        </form>
-        <div
-          id="form-message"
-          class="hidden justify-center items-center mt-4 text-[var(--white)] text-lg"
-        >
-          ✅ Thank you for your message!
-        </div>
+          Submit
+        </button>
+      </form>
+      <div
+        id="form-message"
+        class="hidden justify-center items-center mt-4 text-[var(--white)] text-lg"
+      >
+        ✅ Thank you for your message!
       </div>
     </div>
   </div>
