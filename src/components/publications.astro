@@ -81,18 +81,6 @@ const projects: Publication[] = [
       "This paper presents our approaches to SMM4H’22 task 5 - Classification of tweets of self-reported COVID-19 symptoms in Spanish, and task 10 - Detection of disease mentions in tweets – SocialDisNER (in Spanish). We have presented hybrid systems that combine Deep Learning techniques with linguistic rules and medical ontologies, which have allowed us to achieve outstanding results in both tasks.",
     tags: ["NLP", "BERT", "Machine Learning"],
   },
-  {
-    title: "Propuesta de arquitectura para sistemas híbridos de Recuperación de Información en español.",
-    journal:
-      "UCM Thesis Repository",
-    date: "09-2022",
-    image: tfm as ImageMetadata,
-    link: "https://hdl.handle.net/20.500.14352/74048",
-    status: "Published",
-    description:
-      "This Master's Thesis presents a new architecture for Information Retrieval systems in Spanish. This architecture is based on the techniques that have yielded the best results in English, thanks to recent advances in Natural Language Processing. Specifically, it uses a hybrid retrieval system that merges the speed of classical probabilistic models with the efficiency of models based on modern neural networks. Additionally, the thesis proposes a new dataset, called \"RISQAC,\" to evaluate Information Retrieval systems in Spanish.",
-    tags: ["Information Retrieval", "SOTA", "AI Evaluation"],
-  },
     {
     title: "MMG at SemEval-2022 Task 1: A Reverse Dictionary approach based on a review of the dataset from a lexicographic perspective.",
     journal:
@@ -108,7 +96,6 @@ const projects: Publication[] = [
 
 ];
 ---
-
 <section
   id="publications"
   class="py-12 border-t border-[#ffffff10] text-[var(--white)]"
@@ -118,59 +105,113 @@ const projects: Publication[] = [
     <h3 class="text-4xl md:text-5xl font-medium mb-8">Publications</h3>
 
     <div class="flex flex-col gap-12">
-      {
-        projects.map((project) => (
-          <div class="group bg-[#1414149c] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border border-1 border-[var(--white-icon-tr)] p-6 flex flex-col md:flex-row items-start">
-            {/* Left side: Small Preview Image (now clickable) */}
-            <div class="md:w-1/3 mb-6 md:mb-0 md:mr-6 flex-shrink-0">
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`View preview of ${project.title}`}
-              >
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  class="w-full h-48 md:h-full object-cover rounded-xl group-hover:scale-102 transition-transform duration-300"
-                />
-              </a>
-            </div>
-
-            {/* Right side: Rest of the fields */}
-            <div class="md:w-2/3 flex flex-col gap-4">
-              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                <h4 class="text-3xl font-semibold mb-2 sm:mb-0">
-                  {project.title}
-                </h4>
-                <span class="py-1 px-3 text-sm text-[var(--white-icon)] bg-[#0a0a0a] rounded-full">
-                  {project.status}
-                </span>
+      <div id="publications-container">
+        {
+          projects.map((project, index) => (
+            <div 
+              class={`group bg-[#1414149c] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border border-1 border-[var(--white-icon-tr)] p-6 flex flex-col md:flex-row items-start publication-item ${index >= 2 ? 'hidden' : ''}`}
+            >
+              {/* Left side: Small Preview Image (now clickable) */}
+              <div class="md:w-1/3 mb-6 md:mb-0 md:mr-6 flex-shrink-0">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View preview of ${project.title}`}
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    class="w-full h-48 md:h-full object-cover rounded-xl group-hover:scale-102 transition-transform duration-300"
+                  />
+                </a>
               </div>
-              <h5 class="text-1xl italic mb-2 sm:mb-0">{project.journal}</h5>
-              {/* Technologies Used Section */}
-              <div class="mt-2">
-                <h5 class="text-lg font-medium text-[var(--white)] mb-2">
-                  Tags:
-                </h5>
-                <div class="flex flex-wrap gap-2">
-                  {project.tags.map((tech) => (
-                    <span class="px-3 py-1 bg-[var(--white-icon-tr)] text-xs text-[var(--white)] rounded-full">
-                      {tech}
-                    </span>
-                  ))}
+
+              {/* Right side: Rest of the fields */}
+              <div class="md:w-2/3 flex flex-col gap-4">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                  <h4 class="text-3xl font-semibold mb-2 sm:mb-0">
+                    {project.title}
+                  </h4>
+                  <span class="py-1 px-3 text-sm text-[var(--white-icon)] bg-[#0a0a0a] rounded-full">
+                    {project.status}
+                  </span>
                 </div>
+                <h5 class="text-1xl italic mb-2 sm:mb-0">{project.journal}</h5>
+                {/* Technologies Used Section */}
+                <div class="mt-2">
+                  <h5 class="text-lg font-medium text-[var(--white)] mb-2">
+                    Tags:
+                  </h5>
+                  <div class="flex flex-wrap gap-2">
+                    {project.tags.map((tech) => (
+                      <span class="px-3 py-1 bg-[var(--white-icon-tr)] text-xs text-[var(--white)] rounded-full">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <p class="text-md text-[var(--white-icon)] leading-relaxed">
+                  {project.description}
+                </p>
               </div>
-
-              <p class="text-md text-[var(--white-icon)] leading-relaxed">
-                {project.description}
-              </p>
-
-              
             </div>
-          </div>
-        ))
-      }
+          ))
+        }
+      </div>
+
+      {/* Show More Button */}
+      {projects.length > 2 && (
+        <div class="flex justify-center mt-8">
+          <button
+            id="show-more-btn"
+            class="px-6 py-3 bg-[var(--white-icon-tr)] hover:bg-[var(--white-icon)] text-[var(--white)] rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--white-icon)] focus:ring-offset-2 focus:ring-offset-[#141414]"
+          >
+            Show More Publications
+          </button>
+        </div>
+      )}
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const publicationItems = document.querySelectorAll('.publication-item');
+    let visibleCount = 2;
+
+    if (showMoreBtn) {
+      showMoreBtn.addEventListener('click', function() {
+        // Show next 2 publications
+        for (let i = visibleCount; i < Math.min(visibleCount + 2, publicationItems.length); i++) {
+          const item = publicationItems[i] as HTMLElement;
+          item.classList.remove('hidden');
+          item.style.opacity = '0';
+          item.style.transform = 'translateY(20px)';
+          
+          // Animate in with a slight delay
+          setTimeout(() => {
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          }, 100);
+        }
+
+        visibleCount += 2;
+
+        // Hide button if all publications are visible
+        if (visibleCount >= publicationItems.length) {
+          showMoreBtn.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          showMoreBtn.style.opacity = '0';
+          showMoreBtn.style.transform = 'translateY(10px)';
+          
+          setTimeout(() => {
+            showMoreBtn.style.display = 'none';
+          }, 300);
+        }
+      });
+    }
+  });
+</script>
