@@ -1,9 +1,12 @@
 ---
 import { Image } from "astro:assets";
-import svgl from "../../public/svgl.png";
-import stockin from "../../public/stockin.png";
-import moviesfordevs from "../../public/moviesfordevs.png";
-import velez from "../../public/velez.png";
+import { ImageMetadata } from "astro";
+
+import custom from "../../public/projects/custom/logo.png";
+import debug from "../../public/projects/debugger/logo.png";
+import medical from "../../public/projects/medical/logo.png";
+import searcher from "../../public/projects/searcher/logo.png";
+
 
 interface Project {
   title: string;
@@ -11,41 +14,71 @@ interface Project {
   preview: string;
   status: string;
   description: string;
-  technologies: string[]; // Added a technologies field
+  technologies: string[];
+  link?: string;
 }
 
 const projects: Project[] = [
   {
-    title: "MoviesForDevs",
-    image: moviesfordevs as ImageMetadata,
-    preview: "https://movies-for-devs.vercel.app",
-    status: "Deployed",
-    description: "MoviesForDevs is a curated web application designed to help developers discover movies and TV shows that are relevant to their interests. It features a comprehensive search, filtering by genre and keywords, and details about each title, including cast and crew. This project showcases my skills in front-end development, API integration, and user experience design.",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "TMDB API"],
+    title: "Medical Writing Assistant",
+    image: medical as ImageMetadata,
+    preview:
+      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/medical_writing",
+    status: "Client",
+    description:
+      "This product helps medical professionals write documents by leveraging papers from the PubMed Portal. It uses QdrantDB to index medical paper data, ensuring accuracy and relevance. The entire application is Dockerized, making it easy to deploy online. It handles both single requests and features a multi-turn chat mode. A key feature is its ability to cite all data sources, which helps avoid AI hallucinations and provides reliable, verifiable information. The system uses a multi-agent workflow to ensure a comprehensive and accurate response.",
+    technologies: [
+      "LLMs",
+      "Medical AI",
+      "Agentic AI",
+      "Streamlit",
+      "Qdrant",
+      "OpenAI",
+    ],
   },
   {
-    title: "StockIn",
-    image: stockin as ImageMetadata,
-    preview: "https://stockin-demo.vercel.app",
-    status: "On Development",
-    description: "StockIn is an inventory management system aimed at small to medium-sized businesses. It provides features for tracking stock levels, managing product details, processing orders, and generating reports. The application is built with a focus on scalability and ease of use, demonstrating my expertise in full-stack development and database management.",
-    technologies: ["Next.js", "Express.js", "MongoDB", "Auth0"],
+    title: "Custom day-to-day assistant",
+    image: custom as ImageMetadata,
+    preview:
+      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/custom_assistant",
+    status: "Personal",
+    description:
+      "My custom day-to-day application to organize my daily tasks and workflow. A complex MCP-based client that connects many functionalities as MCP Servers (Azure DevOps, Github, ArxivAPI, Web Fetcher) and sends daily reminders of state of work & alerts via Telegram to my work phone. It also features memory and storage systems (MongoDB) to save and improve the queries.",
+    technologies: ["MCP", "Agentic AI", "MongoDB", "OpenAI", "FastAPI"],
   },
   {
-    title: "Svgl.app",
-    image: svgl as ImageMetadata,
-    preview: "https://svgl.app",
-    status: "Contributor",
-    description: "Svgl.app is a web tool that simplifies the process of creating and optimizing SVG assets. My contributions to this project included implementing new features for SVG manipulation, improving the user interface, and optimizing performance. This experience highlights my collaboration skills in open-source projects and my ability to work with complex graphical libraries.",
-    technologies: ["Vue.js", "Nuxt.js", "SVG.js", "Webpack"],
+    title: "Improved Document Search and Recommendation System",
+    image: searcher as ImageMetadata,
+    preview:
+      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/document_searcher",
+    status: "Client",
+    description:
+      "A multimodal Search Engine in-domain to help users improving the queries using the latest AI Information Retrieval techniques. Uses re-ranking and double sparse & dense information retrieval algorithms. Also the system has a custom implementation of HyDE techniques.",
+    technologies: [
+      "Search Engine",
+      "Embeddings",
+      "HyDE",
+      "CosmosDB",
+      "AzureAISearch",
+      "Agentic AI",
+      "VLM",
+    ],
   },
   {
-    title: "Rifas Velez Web",
-    image: velez as ImageMetadata,
-    preview: "https://www.rifasvelez.com",
-    status: "Deployed",
-    description: "Rifas Velez Web is an e-commerce platform for a local business specializing in raffles and contests. I developed the entire front-end and integrated it with a secure payment gateway and an administrative backend for managing raffles and participants. This project demonstrates my capabilities in creating secure and user-friendly e-commerce solutions.",
-    technologies: ["Astro", "Stripe API", "Netlify Functions", "Sanity CMS"],
+    title: "Custom Local AI Debugger",
+    image: debug as ImageMetadata,
+    preview:
+      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/debugger",
+    status: "Company Tool",
+    description:
+      "A custom debugger that enhances the developer experience with a local, privacy-preserving AI. It integrates with an MCP server to provide intelligent assistance, using on-device LLMs to analyze code, suggest fixes, and explain bugs without sending your proprietary data to external cloud services.",
+    technologies: [
+      "Local LLMs",
+      "On-device AI",
+      "Agentic AI",
+      "MCP",
+      "Code Generation",
+    ],
   },
 ];
 ---
@@ -79,7 +112,9 @@ const projects: Project[] = [
 
               {/* Technologies Used Section */}
               <div class="mt-2">
-                <h5 class="text-lg font-medium text-[var(--white)] mb-2">Technologies Used:</h5>
+                <h5 class="text-lg font-medium text-[var(--white)] mb-2">
+                  Tags:
+                </h5>
                 <div class="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span class="px-3 py-1 bg-[var(--white-icon-tr)] text-xs text-[var(--white)] rounded-full">
@@ -126,7 +161,7 @@ const projects: Project[] = [
                   >
                     <path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z" />
                   </svg>
-                  <span class="hidden sm:inline">Preview</span>
+                  <span class="hidden sm:inline">More Details</span>
                 </a>
               </div>
             </div>
@@ -134,23 +169,5 @@ const projects: Project[] = [
         ))
       }
     </div>
-    <a
-      target="_blank"
-      href="https://github.com/Gothsec?tab=repositories"
-      aria-label="GitHub"
-      class="w-full flex items-center justify-center gap-2 mt-9 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-[var(--white-icon-tr)] p-3 rounded-full bg-[#1414149c] hover:bg-[var(--white-icon-tr)] hover:scale-105"
-    >
-      <span class="md:text-lg text-md">More projects on</span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        class="size-6"
-      >
-        <path
-          d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z"
-        ></path>
-      </svg>
-    </a>
   </div>
 </section>
