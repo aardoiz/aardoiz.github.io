@@ -47,7 +47,7 @@ const SkillsList = () => {
     "End-to-End Projects": [
       "Gathering Requirements | Client Delivery",
       "Concepts -> POCs -> MVPs -> Services",
-      "Backend development & Frontend (vibecoding :D)",
+      "Backend development",
       "DevOps & MLOps | CI/CD"
     ],
     "Leadership & Innovation": [
