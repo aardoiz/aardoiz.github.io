@@ -6,7 +6,7 @@ import custom from "../../public/projects/custom/logo.png";
 import debug from "../../public/projects/debugger/logo.png";
 import medical from "../../public/projects/medical/logo.png";
 import searcher from "../../public/projects/searcher/logo.png";
-
+import teacher from "../../public/projects/teacher/logo.png";
 
 interface Project {
   title: string;
@@ -19,6 +19,24 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    title: "English Conversational Coach",
+    image: teacher as ImageMetadata,
+    preview:
+      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/teacher/",
+    status: "Personal",
+    description:
+      "A custom English conversational partner to improve my second language skills. It's loaded with questions for AI interviews; after answering, the system evaluates my response and returns feedback and improvements. Finally, it creates a good answer and reproduce it on my spakers using TTS models",
+    technologies: [
+      "LLMs",
+      "Speech To Text",
+      "Agentic AI",
+      "Text To Speech",
+      "AzureCloud",
+      "FastAPI"
+    ],
+  },
+  ,
   {
     title: "Medical Writing Assistant",
     image: medical as ImageMetadata,
