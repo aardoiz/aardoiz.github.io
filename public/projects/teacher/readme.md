@@ -10,7 +10,8 @@ By speaking your answer into your microphone, you’ll receive an improved versi
 
 # Sample
 
-[![Sample](https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/teacher/logo.png)](https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/teacher/function.mp4)
+<video src="https://raw.githubusercontent.com/aardoiz/aardoiz.github.io/main/public/projects/teacher/function.mp4" controls="controls" width="100%" height="auto">
+</video>
 
 
 # Features
