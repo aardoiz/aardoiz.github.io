@@ -10,7 +10,7 @@ English Coach is a FastAPI-based web service that helps users practice and impro
 By speaking your answer into your microphone, you’ll receive an improved version of your response, detailed feedback on improvements, and a model “book” answer.
 
 # Sample
-[function.webm](https://github.com/user-attachments/assets/e35fd224-3173-4936-936f-12fa75d89f3c)
+[function.webm](https://github.com/user-attachments/assets/b634347f-2dd7-4b67-8a7e-5f84895f60e3)
 
 
 # Features
@@ -27,3 +27,4 @@ The application reads settings via Pydantic. For now I'm using the following mod
 • STT_MODEL -> `gpt-4o-mini-transcribe`
 • TTS_MODEL -> `gpt-4o-mini-TTS`
 • AZURE_TTS_VOICE -> `alloy`
+
