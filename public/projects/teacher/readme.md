@@ -10,7 +10,7 @@ By speaking your answer into your microphone, you’ll receive an improved versi
 
 # Sample
 
-<video src="https://raw.githubusercontent.com/aardoiz/aardoiz.github.io/main/public/projects/teacher/function.mp4" controls="controls" width="100%" height="auto">
+<video src="https://raw.githubusercontent.com/aardoiz/aardoiz.github.io/main/public/projects/teacher/function.webm" controls="controls" width="100%" height="auto">
 </video>
 
 
