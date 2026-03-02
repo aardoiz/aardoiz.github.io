@@ -6,12 +6,11 @@ English Coach is a FastAPI-based web service that helps users practice and impro
  3. Text to Speech (TTS) of the improved answer  
  4. A simple browser UI for recording, playback and feedback  
 
+
 By speaking your answer into your microphone, you’ll receive an improved version of your response, detailed feedback on improvements, and a model “book” answer.
 
 # Sample
-
-<video src="https://raw.githubusercontent.com/aardoiz/aardoiz.github.io/main/public/projects/teacher/function.webm" controls="controls" width="100%" height="auto">
-</video>
+[function.webm](https://github.com/user-attachments/assets/e35fd224-3173-4936-936f-12fa75d89f3c)
 
 
 # Features
