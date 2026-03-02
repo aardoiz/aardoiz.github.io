@@ -1,6 +1,4 @@
 # Overview
----
-
 English Coach is a FastAPI-based web service that helps users practice and improve their spoken English answers for technical AI interviews. It provides a full voice interaction pipeline:
 
  1. Speech to Text (STT) via Azure OpenAI’s speech transcription  
@@ -10,9 +8,12 @@ English Coach is a FastAPI-based web service that helps users practice and impro
 
 By speaking your answer into your microphone, you’ll receive an improved version of your response, detailed feedback on improvements, and a model “book” answer.
 
-# Features
----
+# Sample
 
+[![Sample](https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/teacher/logo.png)](https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/teacher/function.mp4)
+
+
+# Features
 • Real-time speech transcription (webm → wav → text)  
 • AI-driven evaluation and coached improvements  
 • Synthesized audio playback of the improved answer  
@@ -20,7 +21,6 @@ By speaking your answer into your microphone, you’ll receive an improved versi
 • CORS-enabled for easy integration with single-page front ends
 
 # Configuration
----
 The application reads settings via Pydantic. For now I'm using the following models:
 
 • LLM_MODEL ->  `gpt-4.1-mini`
