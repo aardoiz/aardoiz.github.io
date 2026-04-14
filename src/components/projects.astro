@@ -7,6 +7,7 @@ import debug from "../../public/projects/debugger/logo.png";
 import medical from "../../public/projects/medical/logo.png";
 import searcher from "../../public/projects/searcher/logo.png";
 import teacher from "../../public/projects/teacher/logo.png";
+import contrarial from "../../public/projects/contrarial/logo.png";
 
 interface Project {
   title: string;
@@ -35,6 +36,22 @@ const projects: Project[] = [
       "Text To Speech",
       "AzureCloud",
       "FastAPI",
+    ],
+  },
+  {
+    title: "Contrarial Agents",
+    image: contrarial as ImageMetadata,
+    link: "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/contrarial/readme.md",
+    preview:
+      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/contrarial/",
+    status: "Personal",
+    description:
+      "A toy system to validate how two autonomous agents interact between each other in a role-play game. The settings are simple, one of the agents represent a Guardian of knowledge (papers from ArXiV), and the other one must answer the riddles to access the knowledge. The system has been built as a full infrastructure to practise (document parsing, chunking, model selection, agent orchestration, rerankers...).",
+    technologies: [
+      "LLMs",
+      "Autonomous Agents",
+      "Agentic AI",
+      "Re-Rankers",
     ],
   },
   {
