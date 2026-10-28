@@ -7,21 +7,10 @@
       "astro/client"
     ],
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@components/*": [
-        "src/components/*"
-      ]
-    },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*",
-    "astro.config.ts"
+    "astro.config.mjs"
   ]
 }
