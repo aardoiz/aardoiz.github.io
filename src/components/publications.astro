@@ -1,217 +1,156 @@
 ---
 import { Image } from "astro:assets";
-import ambiguity from "../../public/papers/ambiguity.png";
-import discharges from "../../public/papers/discharges.png";
-import hybrid from "../../public/papers/hybrid.png";
-import radia from "../../public/papers/radia.png";
-import semeval from "../../public/papers/semeval.png";
-import spanishbff from "../../public/papers/spanishbff.png";
-import tfm from "../../public/papers/tfm.png";
-
-
-interface Publication {
-  title: string;
-  journal: string;
-  date: string;
-  image: ImageMetadata;
-  link: string;
-  status: string;
-  description: string;
-  tags: string[];
-}
-
-const projects: Publication[] = [
-    
-  {
-    title: "Recommendation System of Scientific Articles from Discharge Summaries.",
-    journal:"Engineering Applications of Artificial Intelligence.",
-    date: "10-2024",
-    image: discharges as ImageMetadata,
-    link: "https://www.sciencedirect.com/science/article/pii/S0952197624011862",
-    status: "Published",
-    description:
-      "MELENDI (Medical Expert Linguist for Evaluating Nosology and Diagnosis Information) is a recommendation system that helps medical professionals find relevant articles by analyzing patient discharge summaries and scientific publications. The system, which was positively evaluated by medical specialists, suggests articles based on a patient's diagnosis, aiming to efficiently keep doctors updated on the latest literature.",
-    tags: ["LLMs", "Medical AI", "Information Retrieval"],
-  },
-{
-    title: "RADIA -- Radio Advertisement Detection with Intelligent Analytics.",
-    journal:"Arxiv",
-    date: "03-2024",
-    image: radia as ImageMetadata,
-    link: "https://arxiv.org/abs/2403.03538",
-    status: "Preprint",
-    description:
-      "A new automated technique called RadIA uses advanced speech recognition and text classification to effectively monitor radio advertisements. Unlike traditional methods, RadIA doesn't need prior knowledge of ad content, allowing it to detect impromptu or new ads. The model, trained on carefully segmented text data, achieved an impressive F1-macro score of 87.76. This technology has the potential to help companies monitor ad broadcast compliance and analyze competitors' ad strategies.",
-    tags: ["NLP", "Speech Recognition", "Machine Learning"],
-  },
-  
-{
-    title: "Spanish Built Factual Freectianary (Spanish-BFF): the first AI-generated free dictionary.",
-    journal:
-      "Arxiv",
-    date: "02-2023",
-    image: spanishbff as ImageMetadata,
-    link: "https://arxiv.org/abs/2302.12746",
-    status: "Preprint",
-    description:
-      "Dictionaries are one of the oldest and most used linguistic resources. Building them is a complex task that, to the best of our knowledge, has yet to be explored with generative Large Language Models (LLMs). We introduce the \"Spanish Built Factual Freectianary\" (Spanish-BFF) as the first Spanish AI-generated dictionary. This first-of-its-kind free dictionary uses GPT-3. We also define future steps we aim to follow to improve this initial commitment to the field, such as more additional languages.",
-    tags: ["LLMs", "Open-Source", "AI Evaluation"],
-  },
-  {
-    title: "Linguistic ambiguity analysis in ChatGPT.",
-    journal:
-      "Arxiv",
-    date: "02-2023",
-    image: ambiguity as ImageMetadata,
-    link: "https://arxiv.org/abs/2302.06426",
-    status: "Preprint",
-    description:
-      "TLinguistic ambiguity is and has always been one of the main challenges in Natural Language Processing (NLP) systems. Modern Transformer architectures like BERT, T5 or more recently InstructGPT have achieved some impressive improvements in many NLP fields, but there is still plenty of work to do. Motivated by the uproar caused by ChatGPT, in this paper we provide an introduction to linguistic ambiguity, its varieties and their relevance in modern NLP, and perform an extensive empiric analysis. ChatGPT strengths and weaknesses are revealed, as well as strategies to get the most of this model.",
-    tags: ["LLMs", "AI Evaluation", "NLP"],
-  },
-  {
-    title: "dezzai@SMM4H’22: Tasks 5 & 10 - Hybrid models everywhere.",
-    journal:
-      "Proceedings of The Seventh Workshop on Social Media Mining for Health Applications, Workshop & Shared Task.",
-    date: "10-2022",
-    image: hybrid as ImageMetadata,
-    link: "https://aclanthology.org/2022.smm4h-1.3/",
-    status: "Published",
-    description:
-      "This paper presents our approaches to SMM4H’22 task 5 - Classification of tweets of self-reported COVID-19 symptoms in Spanish, and task 10 - Detection of disease mentions in tweets – SocialDisNER (in Spanish). We have presented hybrid systems that combine Deep Learning techniques with linguistic rules and medical ontologies, which have allowed us to achieve outstanding results in both tasks.",
-    tags: ["NLP", "BERT", "Machine Learning"],
-  },
-    {
-    title: "MMG at SemEval-2022 Task 1: A Reverse Dictionary approach based on a review of the dataset from a lexicographic perspective.",
-    journal:
-      "Proceedings of the 16th International Workshop on Semantic Evaluation (SemEval-2022) ",
-    date: "07-2022",
-    image: semeval as ImageMetadata,
-    link: "https://aclanthology.org/2022.semeval-1.7/",
-    status: "Published",
-    description:
-      "This paper presents a novel and linguistic-driven system for the Spanish Reverse Dictionary task of SemEval-2022 Task 1. The aim of this task is the automatic generation of a word using its gloss. The conclusion is that this task results could improve if the quality of the dataset did as well by incorporating high-quality lexicographic data. Therefore, in this paper we analyze the main gaps in the proposed dataset and describe how these limitations could be tackled.",
-    tags: ["NLP", "BERT", "Machine Learning"],
-  },
-
-];
+import { publications } from "../content/portfolio";
+import { publicationPreviews } from "../content/media";
+const descriptions: Record<string, string> = {
+  "2024-discharge":
+    "MELENDI uses patient discharge summaries to recommend relevant scientific articles, applying information retrieval to clinical language.",
+};
+const renderDescription = (href: string) =>
+  ({
+    "https://www.sciencedirect.com/science/article/pii/S0952197624011862":
+      descriptions["2024-discharge"],
+    "https://arxiv.org/abs/2403.03538":
+      "RADIA combines speech recognition and NLP text classification to detect radio advertisements, including new and unscripted ad content.",
+    "https://arxiv.org/abs/2302.12746":
+      "A study of GPT-3 for generating a free Spanish dictionary, examining language models as a tool for building and evaluating lexical resources.",
+    "https://arxiv.org/abs/2302.06426":
+      "An empirical study of how ChatGPT handles linguistic ambiguity, examining model strengths, limitations and implications for language model use.",
+    "https://aclanthology.org/2022.smm4h-1.3/":
+      "Hybrid NLP systems combining deep learning, linguistic rules and medical ontologies for classification and entity detection in Spanish health-related text.",
+    "https://aclanthology.org/2022.semeval-1.7/":
+      "A reverse dictionary study examining dataset quality and the relationship between definitions and word representations through a lexicographic lens.",
+  })[href];
 ---
+
 <section
   id="publications"
-  class="py-12 border-t border-[#ffffff10] text-[var(--white)]"
+  class="section shell"
+  aria-labelledby="research-title"
 >
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">Academy</h2>
-    <h3 class="text-4xl md:text-5xl font-medium mb-8">Publications</h3>
-
-    <div class="flex flex-col gap-12">
-      <div id="publications-container">
-        {
-          projects.map((project, index) => (
-            <div 
-              class={`group bg-[#1414149c] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border border-1 border-[var(--white-icon-tr)] p-6 flex flex-col md:flex-row items-start publication-item ${index >= 2 ? 'hidden' : ''}`}
+  <div class="section-heading">
+    <div>
+      <div class="eyebrow">Research & publications</div><h2 id="research-title">
+        Publications
+      </h2>
+    </div><p>
+      My research connects information retrieval, natural language processing
+      and language model evaluation with practical AI engineering.
+    </p>
+  </div>
+  <p class="research-note">
+    My current PhD research focuses on multimodal information retrieval,
+    vision-language models and evaluation. Explore selected publications and
+    preprints below.
+  </p>
+  <div class="publication-list">
+    {
+      publications.slice(0, 2).map((paper) => (
+        <article class="publication-card">
+          <a
+            class="publication-cover"
+            href={paper.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Read ${paper.title}`}
+          >
+            <Image
+              src={publicationPreviews[paper.href]}
+              alt={`First-page preview of ${paper.title}`}
+              widths={[240, 480, 720]}
+              sizes="(max-width: 700px) calc(100vw - 100px), 300px"
+              loading="lazy"
+            />
+          </a>
+          <div class="publication-content">
+            <>
+              <div class="publication-title-row">
+                <>
+                  <h3>
+                    <a
+                      href={paper.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {paper.title}
+                    </a>
+                  </h3>
+                  <span class="project-status">{paper.status}</span>
+                </>
+              </div>
+              <p class="publication-venue">
+                {paper.venue} · {paper.year}
+              </p>
+              <p>{renderDescription(paper.href)}</p>
+              <a
+                class="text-link"
+                href={paper.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read paper <span aria-hidden="true">↗</span>
+              </a>
+            </>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+  <details class="more-papers">
+    <summary>More publications and preprints</summary><div
+      class="publication-list"
+    >
+      {
+        publications.slice(2).map((paper) => (
+          <article class="publication-card">
+            <a
+              class="publication-cover"
+              href={paper.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Read ${paper.title}`}
             >
-              {/* Left side: Small Preview Image (now clickable) */}
-              <div class="md:w-1/3 mb-6 md:mb-0 md:mr-6 flex-shrink-0">
+              <Image
+                src={publicationPreviews[paper.href]}
+                alt={`First-page preview of ${paper.title}`}
+                widths={[240, 480, 720]}
+                sizes="(max-width: 700px) calc(100vw - 100px), 300px"
+                loading="lazy"
+              />
+            </a>
+            <div class="publication-content">
+              <>
+                <div class="publication-title-row">
+                  <>
+                    <h3>
+                      <a
+                        href={paper.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {paper.title}
+                      </a>
+                    </h3>
+                    <span class="project-status">{paper.status}</span>
+                  </>
+                </div>
+                <p class="publication-venue">
+                  {paper.venue} · {paper.year}
+                </p>
+                <p>{renderDescription(paper.href)}</p>
                 <a
-                  href={project.link}
+                  class="text-link"
+                  href={paper.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`View preview of ${project.title}`}
                 >
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    class="w-full h-48 md:h-full object-cover rounded-xl group-hover:scale-102 transition-transform duration-300"
-                  />
+                  Read paper <span aria-hidden="true">↗</span>
                 </a>
-              </div>
-
-              {/* Right side: Rest of the fields */}
-              <div class="md:w-2/3 flex flex-col gap-4">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                  <h4 class="text-3xl font-semibold mb-2 sm:mb-0">
-                    {project.title}
-                  </h4>
-                  <span class="py-1 px-3 text-sm text-[var(--white-icon)] bg-[#0a0a0a] rounded-full">
-                    {project.status}
-                  </span>
-                </div>
-                <h5 class="text-1xl italic mb-2 sm:mb-0">{project.journal}</h5>
-                {/* Technologies Used Section */}
-                <div class="mt-2">
-                  <h5 class="text-lg font-medium text-[var(--white)] mb-2">
-                    Tags:
-                  </h5>
-                  <div class="flex flex-wrap gap-2">
-                    {project.tags.map((tech) => (
-                      <span class="px-3 py-1 bg-[var(--white-icon-tr)] text-xs text-[var(--white)] rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <p class="text-md text-[var(--white-icon)] leading-relaxed">
-                  {project.description}
-                </p>
-              </div>
+              </>
             </div>
-          ))
-        }
-      </div>
-
-      {/* Show More Button */}
-      {projects.length > 2 && (
-        <div class="flex justify-center mt-8">
-          <button
-            id="show-more-btn"
-            class="px-6 py-3 bg-[var(--white-icon-tr)] hover:bg-[var(--white-icon)] text-[var(--white)] rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--white-icon)] focus:ring-offset-2 focus:ring-offset-[#141414]"
-          >
-            Show More Publications
-          </button>
-        </div>
-      )}
+          </article>
+        ))
+      }
     </div>
-  </div>
+  </details>
 </section>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const showMoreBtn = document.getElementById('show-more-btn');
-    const publicationItems = document.querySelectorAll('.publication-item');
-    let visibleCount = 2;
-
-    if (showMoreBtn) {
-      showMoreBtn.addEventListener('click', function() {
-        // Show next 2 publications
-        for (let i = visibleCount; i < Math.min(visibleCount + 2, publicationItems.length); i++) {
-          const item = publicationItems[i] as HTMLElement;
-          item.classList.remove('hidden');
-          item.style.opacity = '0';
-          item.style.transform = 'translateY(20px)';
-          
-          // Animate in with a slight delay
-          setTimeout(() => {
-            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            item.style.opacity = '1';
-            item.style.transform = 'translateY(0)';
-          }, 100);
-        }
-
-        visibleCount += 2;
-
-        // Hide button if all publications are visible
-        if (visibleCount >= publicationItems.length) {
-          showMoreBtn.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-          showMoreBtn.style.opacity = '0';
-          showMoreBtn.style.transform = 'translateY(10px)';
-          
-          setTimeout(() => {
-            showMoreBtn.style.display = 'none';
-          }, 300);
-        }
-      });
-    }
-  });
-</script>

@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import { projectPreviews } from "../content/media";
+interface Props {
+  slug: string;
+  title: string;
+}
+const { slug, title } = Astro.props;
+const preview = projectPreviews[slug];
+---
+
+<div class="project-preview">
+  {
+    preview ? (
+      <Image
+        src={preview.image}
+        alt={preview.alt}
+        widths={[480, 800, 1200]}
+        sizes="(max-width: 700px) calc(100vw - 80px), 960px"
+        loading="lazy"
+      />
+    ) : (
+      <div
+        class="preview-placeholder"
+        role="img"
+        aria-label={`${title}: interface preview coming soon`}
+      >
+        <svg
+          width="44"
+          height="44"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1"
+          aria-hidden="true"
+        >
+          <>
+            <rect x="3" y="4" width="18" height="16" rx="3" />
+            <path d="M3 9h18M7 6.5h.01M10 6.5h.01M8 16l3-3 3 3 2-2" />
+          </>
+        </svg>
+        <>
+          <span>Interface preview</span>
+          <small>Coming soon</small>
+        </>
+      </div>
+    )
+  }
+</div>

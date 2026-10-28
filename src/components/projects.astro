@@ -1,192 +1,73 @@
 ---
-import { Image } from "astro:assets";
-import { ImageMetadata } from "astro";
-
-import custom from "../../public/projects/custom/logo.png";
-import debug from "../../public/projects/debugger/logo.png";
-import medical from "../../public/projects/medical/logo.png";
-import searcher from "../../public/projects/searcher/logo.png";
-import teacher from "../../public/projects/teacher/logo.png";
-import contrarial from "../../public/projects/contrarial/logo.png";
-
-interface Project {
-  title: string;
-  image: ImageMetadata;
-  preview: string;
-  status: string;
-  description: string;
-  technologies: string[];
-  link?: string;
-}
-
-const projects: Project[] = [
-  {
-    title: "English Conversational Coach",
-    image: teacher as ImageMetadata,
-    link: "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/teacher/readme.md",
-    preview:
-      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/teacher/",
-    status: "Personal",
-    description:
-      "A custom English conversational partner to improve my second language skills. It's loaded with questions for AI interviews; after answering, the system evaluates my response and returns feedback and improvements. Finally, it creates a good answer and reproduce it on my spakers using TTS models",
-    technologies: [
-      "LLMs",
-      "Speech To Text",
-      "Agentic AI",
-      "Text To Speech",
-      "AzureCloud",
-      "FastAPI",
-    ],
-  },
-  {
-    title: "Contrarial Agents",
-    image: contrarial as ImageMetadata,
-    link: "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/contrarial/readme.md",
-    preview:
-      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/contrarial/",
-    status: "Personal",
-    description:
-      "A toy system to validate how two autonomous agents interact between each other in a role-play game. The settings are simple, one of the agents represent a Guardian of knowledge (papers from ArXiV), and the other one must answer the riddles to access the knowledge. The system has been built as a full infrastructure to practise (document parsing, chunking, model selection, agent orchestration, rerankers...).",
-    technologies: [
-      "LLMs",
-      "Autonomous Agents",
-      "Agentic AI",
-      "Re-Rankers",
-    ],
-  },
-  {
-    title: "Medical Writing Assistant",
-    image: medical as ImageMetadata,
-    preview:
-      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/medical/",
-    status: "Client",
-    description:
-      "This product helps medical professionals write documents by leveraging papers from the PubMed Portal. It uses QdrantDB to index medical paper data, ensuring accuracy and relevance. The entire application is Dockerized, making it easy to deploy online. It handles both single requests and features a multi-turn chat mode. A key feature is its ability to cite all data sources, which helps avoid AI hallucinations and provides reliable, verifiable information. The system uses a multi-agent workflow to ensure a comprehensive and accurate response.",
-    technologies: [
-      "LLMs",
-      "Medical AI",
-      "Agentic AI",
-      "Streamlit",
-      "Qdrant",
-      "OpenAI",
-    ],
-  },
-  {
-    title: "Custom day-to-day assistant",
-    image: custom as ImageMetadata,
-    preview:
-      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/custom/",
-    status: "Personal",
-    description:
-      "My custom day-to-day application to organize my daily tasks and workflow. A complex MCP-based client that connects many functionalities as MCP Servers (Azure DevOps, Github, ArxivAPI, Web Fetcher) and sends daily reminders of state of work & alerts via Telegram to my work phone. It also features memory and storage systems (MongoDB) to save and improve the queries.",
-    technologies: ["MCP", "Agentic AI", "MongoDB", "OpenAI", "FastAPI"],
-  },
-  {
-    title: "Improved Document Search and Recommendation System",
-    image: searcher as ImageMetadata,
-    preview:
-      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/searcher/",
-    status: "Client",
-    description:
-      "A multimodal Search Engine in-domain to help users improving the queries using the latest AI Information Retrieval techniques. Uses re-ranking and double sparse & dense information retrieval algorithms. Also the system has a custom implementation of HyDE techniques.",
-    technologies: [
-      "Search Engine",
-      "Embeddings",
-      "HyDE",
-      "CosmosDB",
-      "AzureAISearch",
-      "Agentic AI",
-      "VLM",
-    ],
-  },
-  {
-    title: "Custom Local AI Debugger",
-    image: debug as ImageMetadata,
-    preview:
-      "https://github.com/aardoiz/aardoiz.github.io/tree/main/public/projects/debugger/",
-    status: "Company Tool",
-    description:
-      "A custom debugger that enhances the developer experience with a local, privacy-preserving AI. It integrates with an MCP server to provide intelligent assistance, using on-device LLMs to analyze code, suggest fixes, and explain bugs without sending your proprietary data to external cloud services.",
-    technologies: [
-      "Local LLMs",
-      "On-device AI",
-      "Agentic AI",
-      "MCP",
-      "Code Generation",
-    ],
-  },
-];
+import { projects } from "../content/portfolio";
+import ProjectPreview from "./projectPreview.astro";
+const featured = projects[0];
 ---
 
-<section
-  id="projects"
-  class="py-12 border-t border-[#ffffff10] text-[var(--white)]"
->
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">My work</h2>
-    <h3 class="text-4xl md:text-5xl font-medium mb-8">Projects</h3>
-
-    <div class="flex flex-col gap-12">
-      {
-        projects.map((project) => (
-          <div class="group bg-[#1414149c] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border border-1 border-[var(--white-icon-tr)] p-6">
-            <div class="mb-6">
-              <Image
-                src={project.image}
-                alt={project.title}
-                class="w-full h-64 md:h-96 object-cover rounded-xl group-hover:scale-102 transition-transform duration-300"
-              />
-            </div>
-            <div class="flex flex-col gap-4">
-              <div class="flex items-center justify-between">
-                <h4 class="text-3xl font-semibold">{project.title}</h4>
-                <span class="py-1 px-3 text-sm text-[var(--white-icon)] bg-[#0a0a0a] rounded-full">
-                  {project.status}
-                </span>
-              </div>
-
-              {/* Technologies Used Section */}
-              <div class="mt-2">
-                <h5 class="text-lg font-medium text-[var(--white)] mb-2">
-                  Tags:
-                </h5>
-                <div class="flex flex-wrap gap-2">
-                  {project.technologies.map((tech) => (
-                    <span class="px-3 py-1 bg-[var(--white-icon-tr)] text-xs text-[var(--white)] rounded-full">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <p class="text-md text-[var(--white-icon)] leading-relaxed">
-                {project.description}
-              </p>
-              <div class="flex gap-4 mt-4">
-                {/* Check if project.link exists before rendering */}
-                {project.link && (
-                  <a
-                    target="_blank"
-                    href={project.link}
-                    aria-label="GitHub"
-                    class="flex items-center gap-2 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-full bg-[#1414149c] hover:bg-[var(--white-icon-tr)] hover:scale-105"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="size-6"
-                    >
-                      <path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z" />
-                    </svg>
-                    <span class="hidden sm:inline">More Details</span>
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        ))
-      }
+<section id="projects" class="section shell" aria-labelledby="work-title">
+  <div class="section-heading">
+    <div>
+      <div class="eyebrow">
+        <span class="index">01 /</span> Selected work
+      </div><h2 id="work-title">Selected AI Engineering Projects</h2>
+    </div><p>
+      Independent AI applications and professional case studies. What I built,
+      the engineering decisions behind it and the results.
+    </p>
+  </div>
+  <article class="feature">
+    <div class="feature-copy">
+      <span class="mono muted">{featured.category}</span><h3>
+        {featured.title}
+      </h3><p>{featured.summary}</p><div class="chips">
+        {
+          ["AI agents", "Data provenance", "Isolated Python"].map((tag) => (
+            <span class="chip">{tag}</span>
+          ))
+        }
+      </div><a class="text-link" href={`/work/${featured.slug}/`}
+        >Explore the case study <span class="arrow" aria-hidden="true">↗</span
+        ></a
+      >
     </div>
+    <a
+      class="feature-preview project-cover-link"
+      href={`/work/${featured.slug}/`}
+      aria-label={`Explore ${featured.title}`}
+      ><ProjectPreview slug={featured.slug} title={featured.title} /></a
+    >
+  </article>
+  <div class="project-grid">
+    {
+      projects.slice(1).map((project) => (
+        <article class="project-card">
+          <a
+            class="project-cover-link"
+            href={`/work/${project.slug}/`}
+            aria-label={`Explore ${project.title}`}
+          >
+            <ProjectPreview slug={project.slug} title={project.title} />
+          </a>
+          <div class="project-card-content">
+            <>
+              <span class="card-category mono">{project.category}</span>
+              <h3>{project.title}</h3>
+              <p>{project.summary}</p>
+              <div class="chips">
+                {project.stack.slice(0, 3).map((tag) => (
+                  <span class="chip">{tag}</span>
+                ))}
+              </div>
+              <a class="text-link" href={`/work/${project.slug}/`}>
+                Read the case study{" "}
+                <span class="arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            </>
+          </div>
+        </article>
+      ))
+    }
   </div>
 </section>

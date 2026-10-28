@@ -1,30 +1,38 @@
-# Overview
-English Coach is a FastAPI-based web service that helps users practice and improve their spoken English answers for technical AI interviews. It provides a full voice interaction pipeline:
+# Voice AI Interview Coach
 
- 1. Speech to Text (STT) via Azure OpenAI’s speech transcription  
- 2. Large Language Model (LLM) evaluation and improvement hints  
- 3. Text to Speech (TTS) of the improved answer  
- 4. A simple browser UI for recording, playback and feedback  
+A voice AI application for practicing technical interviews in English. Built with FastAPI and Azure, it connects browser recording, speech recognition, LLM feedback and speech synthesis in one workflow:
+
+ 1. Speech to Text (STT) via Azure OpenAI’s speech transcription
+ 2. Large Language Model (LLM) evaluation and improvement hints
+ 3. Text to Speech (TTS) of the improved answer
+ 4. A simple browser UI for recording, playback and feedback
 
 
-By speaking your answer into your microphone, you’ll receive an improved version of your response, detailed feedback on improvements, and a model “book” answer.
+Record an answer to an AI interview question, review its transcription and model-generated feedback, then listen to a suggested response.
 
-# Sample
+# Recorded demonstration
+
 [function.webm](https://github.com/user-attachments/assets/b634347f-2dd7-4b67-8a7e-5f84895f60e3)
 
 
 # Features
-• Real-time speech transcription (webm → wav → text)  
-• AI-driven evaluation and coached improvements  
-• Synthesized audio playback of the improved answer  
-• Persistent session history and reset capability  
-• CORS-enabled for easy integration with single-page front ends
+
+- Recorded speech transcription (webm → wav → text)
+- LLM-generated answer feedback and suggested improvements
+- Synthesized audio playback of the improved answer
+- Persistent session history and reset capability
+- CORS-enabled for easy integration with single-page front ends
 
 # Configuration
-The application reads settings via Pydantic. For now I'm using the following models:
 
-• LLM_MODEL ->  `gpt-4.1-mini`
-• STT_MODEL -> `gpt-4o-mini-transcribe`
-• TTS_MODEL -> `gpt-4o-mini-TTS`
-• AZURE_TTS_VOICE -> `alloy`
+The application reads settings via Pydantic. The documented model configuration is:
 
+- LLM_MODEL ->  `gpt-4.1-mini`
+- STT_MODEL -> `gpt-4o-mini-transcribe`
+- TTS_MODEL -> `gpt-4o-mini-TTS`
+- AZURE_TTS_VOICE -> `alloy`
+
+
+# Project context
+
+Built for personal interview practice. The recorded demo demonstrates the integrated voice workflow; transcription accuracy and learning outcomes have not been formally benchmarked. Model-generated feedback may need correction and is not a validated language or pronunciation assessment.
