@@ -79,31 +79,6 @@ const next =
         </div>
       </header>
       <ProjectPreview slug={project.slug} title={project.title} />
-      {
-        project.slug === "english-coach" && (
-          <section class="case-demo" aria-labelledby="demo-title">
-            <>
-              <h2 id="demo-title">Voice interaction demo</h2>
-              <video
-                controls
-                preload="none"
-                poster="/projects/teacher/logo.png"
-                aria-label={`${project.title} recorded demonstration`}
-              >
-                <>
-                  <source
-                    src="/projects/teacher/function.webm"
-                    type="video/webm"
-                  />
-                  <a href="/projects/teacher/function.webm">
-                    Download the recorded demonstration
-                  </a>
-                </>
-              </video>
-            </>
-          </section>
-        )
-      }
       <section class="case-section" aria-labelledby="problem-title">
         <h2 id="problem-title">The problem</h2><div class="case-body">
           <p>{project.problem}</p>

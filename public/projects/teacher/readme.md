@@ -10,11 +10,6 @@ A voice AI application for practicing technical interviews in English. Built wit
 
 Record an answer to an AI interview question, review its transcription and model-generated feedback, then listen to a suggested response.
 
-# Recorded demonstration
-
-[function.webm](https://github.com/user-attachments/assets/b634347f-2dd7-4b67-8a7e-5f84895f60e3)
-
-
 # Features
 
 - Recorded speech transcription (webm → wav → text)
@@ -35,4 +30,4 @@ The application reads settings via Pydantic. The documented model configuration 
 
 # Project context
 
-Built for personal interview practice. The recorded demo demonstrates the integrated voice workflow; transcription accuracy and learning outcomes have not been formally benchmarked. Model-generated feedback may need correction and is not a validated language or pronunciation assessment.
+Built for personal interview practice. Transcription accuracy and learning outcomes have not been formally benchmarked. Model-generated feedback may need correction and is not a validated language or pronunciation assessment.

@@ -17,7 +17,7 @@ npm run preview
 
 Edit `src/content/portfolio.ts` for case studies, publication references and contact details. The homepage's introduction and selected experience are in its Astro components. Project pages are generated at `/work/[slug]/`.
 
-Project preview images and publication covers are mapped in `src/content/media.ts`. Projects without an interface screenshot show a placeholder. Voice AI Interview Coach includes its existing screenshot and recorded voice demo. Project display names are independent of their URLs; retain the existing slugs when editing titles. Each case study has a dedicated `seoDescription` for search and social previews.
+Project preview images and publication covers are mapped in `src/content/media.ts`. Projects without an interface screenshot show a placeholder. Voice AI Interview Coach includes its existing screenshot. The video demo is temporarily removed; its recording is retained for later restoration. Project display names are independent of their URLs; retain the existing slugs when editing titles. Each case study has a dedicated `seoDescription` for search and social previews.
 
 NBA demo and repository links are intentionally marked `pending`. Set each link's availability to `available` only after checking the public destination. The demo is an exploration of saved analyses, not a live agent.
 

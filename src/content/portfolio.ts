@@ -155,7 +155,7 @@ export const projects: Project[] = [
       "AI interview questions with persistent session history and a reset flow for fresh practice.",
     ],
     evaluation:
-      "The recorded demo shows the complete workflow: record an answer, review its transcription and feedback, then play the suggested response. It demonstrates the integration; transcription accuracy and learning outcomes have not been formally benchmarked.",
+      "Transcription accuracy and learning outcomes have not been formally benchmarked.",
     limitations:
       "Designed for personal interview practice. Model-generated feedback can need correction, and the application does not provide validated language or pronunciation assessment.",
     links: [
